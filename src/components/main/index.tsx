@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 
 interface MainProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const Main: React.FC<MainProps> = ({ children }) => {
