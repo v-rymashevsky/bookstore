@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-interface Book {
-  id: string
+export interface Book {
   title: string
-  author: string
+  subtitle: string
+  isbn13: string
+  price: string
   image: string
-  price: number
+  url: string
 }
 
 interface BooksState {
