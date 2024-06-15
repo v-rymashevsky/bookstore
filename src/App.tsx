@@ -1,15 +1,13 @@
-import { Layout } from './components/layout'
-import { NewBookReleases } from './pages/NewBookReleases'
+import { RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
+import { router } from './router'
 import './styles.scss'
 
 export function App () {
   return (
     <Provider store={store}>
-      <Layout>
-        <NewBookReleases />
-      </Layout>
+          <RouterProvider router={router}/>
     </Provider>
   )
 }
