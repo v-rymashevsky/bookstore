@@ -4,6 +4,7 @@ import { RootState, useAppDispatch } from '../redux/store'
 import { Book, fetchBooks } from '../redux/books-slice'
 import { Card } from '../components/card'
 import { Title } from '../components/title'
+import { Spinner } from '../components/spinner'
 
 export const NewBookReleases: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -19,7 +20,7 @@ export const NewBookReleases: React.FC = () => {
 
   function renderBooks () {
     if (isLoading) {
-      return <div className="spinner-border" style={{ position: 'absolute', top: '50%', left: '50%' }} role="status"></div>
+      return <Spinner/>
     }
     if (error) {
       return <div className="alert alert-danger">{error}</div>
