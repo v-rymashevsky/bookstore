@@ -7,6 +7,11 @@ interface CardProps {
   price: string
 }
 
+function toogleFavIcon (e: React.MouseEvent<HTMLElement>) {
+  e.preventDefault()
+  e.currentTarget.className = e.currentTarget.className === 'bi bi-heart' ? 'bi bi-heart-fill' : 'bi bi-heart'
+}
+
 export const Card: React.FC<CardProps> = ({ image, title, subtitle, price }) => {
   return (
     <div className="card rounded-0" style={{ width: '18rem' }}>
@@ -21,9 +26,12 @@ export const Card: React.FC<CardProps> = ({ image, title, subtitle, price }) => 
         <p className="card-text">
           {subtitle}
         </p>
-        <div className = "d-flex justify-content-between mt-auto">
-         <p className="card-text mb-0">{price}</p>
-         </div>
+        <div className="d-flex justify-content-between mt-auto">
+          <p className="card-text mb-0">{price}</p>
+          <i className="bi bi-heart" style={{
+            cursor: 'pointer'
+          }} onClick={toogleFavIcon}></i>
+        </div>
       </div>
     </div>
   )

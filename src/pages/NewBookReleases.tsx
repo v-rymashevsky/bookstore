@@ -26,6 +26,8 @@ export const NewBookReleases: React.FC = () => {
       return <div className="alert alert-danger">{error}</div>
     }
 
+    console.log(books)
+
     return books.map((book: Book) => (
       <Card
         key={book.isbn13}
