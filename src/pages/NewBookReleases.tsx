@@ -26,15 +26,10 @@ export const NewBookReleases: React.FC = () => {
       return <div className="alert alert-danger">{error}</div>
     }
 
-    console.log(books)
-
     return books.map((book: Book) => (
       <Card
-        key={book.isbn13}
-        title={book.title}
-        subtitle={book.subtitle || 'No description provided'}
-        image={book.image}
-        price={book.price || 'Price not available'}
+      key={book.isbn13}
+      book={book}
       />
     ))
   }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 interface HeaderProps { }
 
@@ -15,7 +16,7 @@ export const Header: React.FC<HeaderProps> = () => {
           <button type="submit" className="btn btn-warning"><i className="bi bi-search"></i></button>
         </form>
         <div className="navbar-nav flex-row">
-          <a className="nav-link px-3" aria-current="page" href="#">Favourites</a>
+          <NavLink className="nav-link px-3" aria-current="page" to="/books/favourites">Favourites</NavLink>
           <a className="nav-link px-3" href="#">Cart</a>
           <a className="nav-link px-3" href="#">User</a>
         </div>

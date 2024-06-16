@@ -1,36 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Book } from '../../redux/books-slice'
 
-interface CardProps {
-  image: string
-  title: string
-  subtitle: string
-  price: string
-}
+export const Card: React.FC<{ book: Book }> = ({ book }) => {
+  const [isFavorite, setIsFavorite] = useState(false)
 
-function toogleFavIcon (e: React.MouseEvent<HTMLElement>) {
-  e.preventDefault()
-  e.currentTarget.className = e.currentTarget.className === 'bi bi-heart' ? 'bi bi-heart-fill' : 'bi bi-heart'
-}
+  useEffect(() => {
+    const favoriteBooks: Book[] = JSON.parse(localStorage.getItem('favoriteBooks') || '[]')
+    const isBookFavorite = favoriteBooks.some((favBook: Book) => favBook.isbn13 === book.isbn13)
+    setIsFavorite(isBookFavorite)
+  }, [book.isbn13])
 
-export const Card: React.FC<CardProps> = ({ image, title, subtitle, price }) => {
+  function toggleFavorite (book: Book) {
+    const favoriteBooks: Book[] = JSON.parse(localStorage.getItem('favoriteBooks') || '[]')
+    const index = favoriteBooks.findIndex(favBook => favBook.isbn13 === book.isbn13)
+    if (index !== -1) {
+      favoriteBooks.splice(index, 1)
+    } else {
+      favoriteBooks.push(book)
+    }
+    localStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooks))
+    setIsFavorite(!isFavorite)
+  }
+
   return (
     <div className="card rounded-0" style={{ width: '18rem' }}>
       <img
-        src={image}
+        src={book.image}
         className="card-img-top"
         style={{ height: '18rem' }}
         alt="post image"
       />
       <div className="card-body d-flex flex-column">
-        <h5 className="card-title" style={{ textTransform: 'uppercase' }}>{title}</h5>
+        <h5 className="card-title" style={{ textTransform: 'uppercase' }}>{book.title}</h5>
         <p className="card-text">
-          {subtitle}
+          {book.subtitle}
         </p>
         <div className="d-flex justify-content-between mt-auto">
-          <p className="card-text mb-0">{price}</p>
-          <i className="bi bi-heart" style={{
+          <p className="card-text mb-0">{book.price}</p>
+          <i className={isFavorite ? 'bi bi-heart-fill' : 'bi bi-heart'} style={{
             cursor: 'pointer'
-          }} onClick={toogleFavIcon}></i>
+          }} onClick={() => toggleFavorite(book)}></i>
         </div>
       </div>
     </div>
