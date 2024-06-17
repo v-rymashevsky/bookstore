@@ -6,6 +6,7 @@ export interface BookItem {
     subtitle: string
     authors: string
     publisher: string
+    language: string
     isbn10: string
     isbn13: string
     pages: string
@@ -15,9 +16,7 @@ export interface BookItem {
     price: string
     image: string
     url: string
-    pdf: {
-        [key: string]: string
-    }
+    pdf: {[key: string]: string}
 }
 
 interface BookItemState {
@@ -40,7 +39,13 @@ export const fetchBook = createAsyncThunk<BookItem, string>(
         throw new Error('Failed to fetch books')
       }
       const data = await response.json()
-      return data
+      return {
+        ...data,
+        pdf: {
+          'Chapter 2': 'https://itbook.store/files/9781617294136/chapter2.pdf',
+          'Chapter 5': 'https://itbook.store/files/9781617294136/chapter5.pdf'
+        }
+      }
     } catch (error) {
       return rejectWithValue(
         typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'
