@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { requestBooks } from '../services/book'
 
 export interface Book {
   title: string
@@ -15,22 +16,21 @@ interface BooksState {
   error: string | null
 }
 
+interface FetchBookParams {
+  search: string
+  page: number
+}
 const initialState: BooksState = {
   list: [],
   isLoading: false,
   error: null
 }
 
-export const fetchBooks = createAsyncThunk<Book[], void>(
+export const fetchBooks = createAsyncThunk<Book[], FetchBookParams>(
   'books/fetchBooks',
-  async (_, { rejectWithValue }) => {
+  async (params: FetchBookParams, { rejectWithValue }) => {
     try {
-      const response = await fetch('https://api.itbook.store/1.0/new')
-      if (!response.ok) {
-        throw new Error('Failed to fetch books')
-      }
-      const data = await response.json()
-      return data.books as Book[]
+      return await requestBooks(params)
     } catch (error) {
       return rejectWithValue(
         typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'
