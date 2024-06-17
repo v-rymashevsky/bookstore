@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Book } from '../../redux/books-slice'
+import { Link } from 'react-router-dom'
 
 export const Card: React.FC<{ book: Book }> = ({ book }) => {
   const [isFavorite, setIsFavorite] = useState(false)
@@ -31,7 +32,7 @@ export const Card: React.FC<{ book: Book }> = ({ book }) => {
         alt="post image"
       />
       <div className="card-body d-flex flex-column">
-        <h5 className="card-title" style={{ textTransform: 'uppercase' }}>{book.title}</h5>
+      <Link to={`/books/${book.isbn13}`} className="card-title" style={{ textTransform: 'uppercase' }}>{book.title}</Link>
         <p className="card-text">
           {book.subtitle}
         </p>
