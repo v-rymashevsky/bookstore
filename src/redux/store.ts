@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import { booksReducer } from './books-slice'
+import { bookItemReducer } from './book-item-slice'
 
 export const store = configureStore({
   reducer: {
-    books: booksReducer
+    books: booksReducer,
+    bookItem: bookItemReducer
   }
 })
 
