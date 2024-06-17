@@ -6,7 +6,12 @@ async function requestBooks (params = {}) {
   return data.books
 }
 
-async function requestBook (isbn13: string) {
+async function requestSearchResults (search: string | undefined) {
+  const { data } = await client.get(`/search/${search}`)
+  return data.books
+}
+
+async function requestBookDetails (isbn13: string) {
   const { data } = await client.get(`/books/${isbn13}`)
   return {
     ...data,
@@ -17,4 +22,4 @@ async function requestBook (isbn13: string) {
   }
 }
 
-export { requestBooks, requestBook }
+export { requestBooks, requestBookDetails, requestSearchResults }

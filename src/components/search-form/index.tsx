@@ -14,7 +14,7 @@ export const SearchForm: React.FC = () => {
     if (!search) {
       alert('Search field must not be empty!')
     } else {
-      navigate(`/posts/search/${search}/pages/1`)
+      navigate(`/search/${search}`)
       setSearch('')
     }
   }
@@ -25,7 +25,7 @@ export const SearchForm: React.FC = () => {
         type="search"
         className="form-control me-1"
         placeholder="Search..."
-        style={{ width: '200px' }}
+        style={{ width: '300px' }}
         onChange={handleChangeSearch}
         value={search}
       />

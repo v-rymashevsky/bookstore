@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { requestBook } from '../services/book'
+import { requestBookDetails } from '../services/book'
 
 export interface BookItem {
     error: string
@@ -35,7 +35,7 @@ export const fetchBook = createAsyncThunk<BookItem, string>(
   'bookItem/fetchBook',
   async (isbn13: string, { rejectWithValue }) => {
     try {
-      return await requestBook(isbn13)
+      return await requestBookDetails(isbn13)
     } catch (error) {
       return rejectWithValue(
         typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'
