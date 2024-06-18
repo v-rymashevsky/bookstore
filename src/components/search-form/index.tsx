@@ -14,7 +14,7 @@ export const SearchForm: React.FC = () => {
     if (!search) {
       alert('Search field must not be empty!')
     } else {
-      navigate(`/search/${search}`)
+      navigate(`/search/${search}/1`)
       setSearch('')
     }
   }

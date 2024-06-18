@@ -11,14 +11,14 @@ import { RootState, useAppDispatch } from '../redux/store'
 export const SearchResults: React.FC = () => {
   const dispatch = useAppDispatch()
   const { query } = useParams()
-  const { page: currentPage } = useParams()
+  const { page } = useParams()
   const books = useSelector((state: RootState) => state.books.list)
   const error = useSelector((state: RootState) => state.books.error)
   const isLoading = useSelector((state: RootState) => state.books.isLoading)
 
   useEffect(() => {
-    dispatch(fetchSearchResults(query))
-  }, [query, currentPage, dispatch])
+    dispatch(fetchSearchResults({ search: query, page: page || '1' }))
+  }, [query, page, dispatch])
 
   function renderBooks () {
     if (isLoading) {

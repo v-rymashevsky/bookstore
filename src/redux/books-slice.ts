@@ -10,16 +10,16 @@ export interface Book {
   url: string
 }
 
+export interface SearchParams {
+  search: string | undefined
+  page: string | undefined
+}
+
 interface BooksState {
   list: Book[]
   isLoading: boolean
   error: string | null
 }
-
-// interface SearchParams {
-//   search: string | undefined
-//   page?: number
-// }
 
 const initialState: BooksState = {
   list: [],
@@ -41,11 +41,11 @@ export const fetchBooks = createAsyncThunk<Book[], void>(
     }
   })
 
-export const fetchSearchResults = createAsyncThunk<Book[], string | undefined >(
+export const fetchSearchResults = createAsyncThunk<Book[], SearchParams >(
   'books/fetchSearchResults',
-  async (search, { rejectWithValue }) => {
+  async ({ search, page }, { rejectWithValue }) => {
     try {
-      return await requestSearchResults(search)
+      return await requestSearchResults({ search, page })
     } catch (error) {
       return rejectWithValue(
         typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'

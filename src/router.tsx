@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         element: <BookDetails />
       },
       {
-        path: '/search/:query',
+        path: '/search/:query/:page',
         element: <SearchResults />
       }
     ]
