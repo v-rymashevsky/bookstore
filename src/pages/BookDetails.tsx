@@ -32,7 +32,6 @@ export function BookDetails () {
     return <div>No book data found.</div>
   }
 
-  console.log(bookItem)
   return (
     <>
       <Title>{bookItem.title}</Title>
