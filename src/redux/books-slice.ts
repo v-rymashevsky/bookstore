@@ -15,16 +15,25 @@ export interface SearchParams {
   page: string | undefined
 }
 
+export interface SearchResults {
+  total: string
+  books: Book[]
+}
+
 interface BooksState {
   list: Book[]
   isLoading: boolean
   error: string | null
+  pagesCount: number
+
 }
 
 const initialState: BooksState = {
-  list: [],
+  list: [] as Book[],
   isLoading: false,
-  error: null
+  error: null,
+  pagesCount: 0
+
 }
 
 export const fetchBooks = createAsyncThunk<Book[], void>(
@@ -41,7 +50,7 @@ export const fetchBooks = createAsyncThunk<Book[], void>(
     }
   })
 
-export const fetchSearchResults = createAsyncThunk<Book[], SearchParams >(
+export const fetchSearchResults = createAsyncThunk<SearchResults, SearchParams >(
   'books/fetchSearchResults',
   async ({ search, page }, { rejectWithValue }) => {
     try {
@@ -68,7 +77,7 @@ const booksSlice = createSlice({
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.isLoading = false
-        state.list = action.payload.map((book) => ({ ...book, isFavorite: false }))
+        state.list = action.payload
       })
       .addCase(fetchBooks.rejected, (state, action) => {
         state.isLoading = false
@@ -79,8 +88,10 @@ const booksSlice = createSlice({
         state.error = null
       })
       .addCase(fetchSearchResults.fulfilled, (state, action) => {
+        const totalNumber = Number(action.payload.total)
         state.isLoading = false
-        state.list = action.payload.map((book) => ({ ...book, isFavorite: false }))
+        state.list = action.payload.books.map((book) => ({ ...book, isFavorite: false }))
+        state.pagesCount = Math.ceil(totalNumber > 1000 ? 100 : totalNumber / 10)
       })
       .addCase(fetchSearchResults.rejected, (state, action) => {
         state.isLoading = false
