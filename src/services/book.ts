@@ -9,7 +9,7 @@ async function requestBooks (params = {}) {
 
 async function requestSearchResults ({ search, page }: SearchParams) {
   const { data } = await client.get(`/search/${search}/${page}`)
-  return data.books
+  return data
 }
 
 async function requestBookDetails (isbn13: string) {
