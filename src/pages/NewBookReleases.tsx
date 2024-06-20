@@ -13,9 +13,7 @@ export const NewBookReleases: React.FC = () => {
   const isLoading = useSelector((state: RootState) => state.books.isLoading)
 
   useEffect(() => {
-    if (books.length === 0) {
-      dispatch(fetchBooks())
-    }
+    dispatch(fetchBooks())
   }, [dispatch, books.length])
 
   function renderBooks () {

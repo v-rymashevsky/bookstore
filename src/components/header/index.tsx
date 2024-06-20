@@ -11,7 +11,7 @@ export const Header: React.FC<HeaderProps> = () => {
   return (
     <nav className="navbar bg-primary" data-bs-theme="dark">
       <div className="container-fluid">
-        <span className="navbar-brand">Bookstore</span>
+      <NavLink className="navbar-brand" aria-current="page" to="/">Bookstore</NavLink>
        <SearchForm />
         <div className="navbar-nav flex-row">
           <NavLink className="nav-link px-3" aria-current="page" to="/books/favourites">Favourites</NavLink>
