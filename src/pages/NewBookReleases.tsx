@@ -14,7 +14,7 @@ export const NewBookReleases: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchBooks())
-  }, [dispatch, books.length])
+  }, [dispatch])
 
   function renderBooks () {
     if (isLoading) {
@@ -26,11 +26,13 @@ export const NewBookReleases: React.FC = () => {
 
     return books.map((book: Book) => (
       <Card
-      key={book.isbn13}
+      key={book.id}
       book={book}
       />
     ))
   }
+
+  console.log(books)
 
   return (
     <>

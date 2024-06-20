@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
         element: <Favourites />
       },
       {
-        path: '/books/:isbn13',
+        path: '/books/:id',
         element: <BookDetails />
       },
       {

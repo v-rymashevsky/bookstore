@@ -46,7 +46,7 @@ export const fetchBook = createAsyncThunk<BookItem, string>(
   })
 
 export const bookItemSlice = createSlice({
-  name: 'post',
+  name: 'book',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
