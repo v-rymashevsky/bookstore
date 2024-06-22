@@ -1,24 +1,35 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Spinner } from '../components/spinner'
 import { RootState, useAppDispatch } from '../redux/store'
 import { useSelector } from 'react-redux'
-import { fetchBook } from '../redux/book-item-slice'
+import { BookItem, fetchBook } from '../redux/book-item-slice'
 import { Title } from '../components/title'
+import CartButton from '../components/button'
 
-export function BookDetails () {
-  const { isbn13 } = useParams()
+export const BookDetails: React.FC = () => {
+  const { id } = useParams()
   const dispatch = useAppDispatch()
-
   const bookItem = useSelector((state: RootState) => state.bookItem.content)
   const loading = useSelector((state: RootState) => state.bookItem.isLoading)
   const error = useSelector((state: RootState) => state.bookItem.error)
 
   useEffect(() => {
-    if (isbn13) {
-      dispatch(fetchBook(isbn13))
+    if (id) {
+      dispatch(fetchBook(id))
     }
-  }, [isbn13, dispatch])
+  }, [id, dispatch])
+
+  function addToCart (book: BookItem) {
+    const shoppingCart: BookItem[] = JSON.parse(localStorage.getItem('shopping-cart') || '[]')
+    const index = shoppingCart.findIndex(cartItem => cartItem.isbn13 === book.isbn13)
+    if (index !== -1) {
+      shoppingCart.splice(index, 1)
+    } else {
+      shoppingCart.push({ ...book, quantity: 1 })
+    }
+    localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
+  }
 
   if (loading) {
     return <Spinner />
@@ -31,6 +42,7 @@ export function BookDetails () {
   if (!bookItem) {
     return <div>No book data found.</div>
   }
+  console.log('rendered book details')
 
   return (
     <>
@@ -38,7 +50,7 @@ export function BookDetails () {
       <div className="card mb-3 border-0">
         <div className="row g-0">
           <div className="col-md-4">
-            <img src={bookItem.image} className="img-fluid rounded-start" alt="book-cover-imag" />
+            <img src={bookItem.image} className="img-fluid rounded-start" alt="book-cover-image" />
           </div>
           <div className="col-md-8">
             <div className="card-body">
@@ -68,7 +80,7 @@ export function BookDetails () {
               </div>
               <div className="d-flex flex-column">
                 <a className="mb-2" href={bookItem.pdf['Chapter 2']} target="_blank" rel="noopener noreferrer">Book Preview</a>
-                <a href="#" className="btn btn-primary" style={{ width: '30%' }}>Add to cart</a>
+                <CartButton book={bookItem} onAddToCart={addToCart} />
               </div>
             </div>
           </div>
