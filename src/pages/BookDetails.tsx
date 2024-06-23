@@ -5,7 +5,8 @@ import { RootState, useAppDispatch } from '../redux/store'
 import { useSelector } from 'react-redux'
 import { BookItem, fetchBook } from '../redux/book-item-slice'
 import { Title } from '../components/title'
-import CartButton from '../components/button'
+import { ShoppingCartButton } from '../components/shopping-cart-button'
+import { setCount } from '../redux/shopping-cart-slice'
 
 export const BookDetails: React.FC = () => {
   const { id } = useParams()
@@ -29,6 +30,7 @@ export const BookDetails: React.FC = () => {
       shoppingCart.push({ ...book, quantity: 1 })
     }
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
+    dispatch(setCount(shoppingCart.length))
   }
 
   if (loading) {
@@ -80,7 +82,7 @@ export const BookDetails: React.FC = () => {
               </div>
               <div className="d-flex flex-column">
                 <a className="mb-2" href={bookItem.pdf['Chapter 2']} target="_blank" rel="noopener noreferrer">Book Preview</a>
-                <CartButton book={bookItem} onAddToCart={addToCart} />
+                <ShoppingCartButton book={bookItem} onAddToCart={addToCart} />
               </div>
             </div>
           </div>
