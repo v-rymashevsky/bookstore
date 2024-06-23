@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Book } from '../../redux/books-slice'
+import { Book, setFavourites } from '../../redux/books-slice'
 import { Link } from 'react-router-dom'
+import { useAppDispatch } from '../../redux/store'
 
 export const Card: React.FC<{ book: Book }> = ({ book }) => {
   const [isFavorite, setIsFavorite] = useState(false)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const favoriteBooks: Book[] = JSON.parse(localStorage.getItem('favoriteBooks') || '[]')
@@ -21,6 +23,7 @@ export const Card: React.FC<{ book: Book }> = ({ book }) => {
     }
     localStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooks))
     setIsFavorite(!isFavorite)
+    dispatch(setFavourites(favoriteBooks))
   }
 
   return (

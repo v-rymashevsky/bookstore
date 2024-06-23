@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { requestBooks, requestSearchResults } from '../services/book'
 
 export interface Book {
@@ -23,6 +23,7 @@ export interface SearchResults {
 
 interface BooksState {
   list: Book[]
+  favourites: Book []
   isLoading: boolean
   error: string | null
   pagesCount: number
@@ -31,6 +32,7 @@ interface BooksState {
 
 const initialState: BooksState = {
   list: [] as Book[],
+  favourites: JSON.parse(localStorage.getItem('favoriteBooks') || '[]'),
   isLoading: false,
   error: null,
   pagesCount: 0
@@ -69,6 +71,9 @@ const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
+    setFavourites (state, action: PayloadAction<Book[]>) {
+      state.favourites = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -101,4 +106,5 @@ const booksSlice = createSlice({
   }
 })
 
+export const { setFavourites } = booksSlice.actions
 export const booksReducer = booksSlice.reducer
