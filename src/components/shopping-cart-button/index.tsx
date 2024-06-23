@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { BookItem } from '../../redux/book-item-slice'
 
 interface CartButtonProps {
-    book: BookItem;
-    onAddToCart: (book: BookItem) => void;
+    book: BookItem
+    onAddToCart: (book: BookItem) => void
   }
 
-export const CartButton: React.FC<CartButtonProps> = ({ book, onAddToCart }) => {
+export const ShoppingCartButton: React.FC<CartButtonProps> = ({ book, onAddToCart }) => {
   const [isInCart, setIsInCart] = useState<boolean>(false)
 
   useEffect(() => {

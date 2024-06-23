@@ -26,7 +26,7 @@ export const NewBookReleases: React.FC = () => {
 
     return books.map((book: Book) => (
       <Card
-      key={book.id}
+      key={book.isbn13}
       book={book}
       />
     ))

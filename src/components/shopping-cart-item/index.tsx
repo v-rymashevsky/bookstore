@@ -2,7 +2,6 @@ import React from 'react'
 import { BookItem } from '../../redux/book-item-slice'
 
 export const ShoppingCartItem: React.FC<{ book: BookItem, onRemove: (book: BookItem) => void }> = ({ book, onRemove }) => {
-  console.log('render')
   return (
             <div className="card mb-3 border-0">
                 <div className="row flex-nowrap g-0">

@@ -32,7 +32,7 @@ export const Card: React.FC<{ book: Book }> = ({ book }) => {
         alt="post image"
       />
       <div className="card-body d-flex flex-column">
-      <Link to={`/books/${book.id}`} className="card-title" style={{ textTransform: 'uppercase' }}>{book.title}</Link>
+      <Link to={`/books/${book.isbn13}`} className="card-title" style={{ textTransform: 'uppercase' }}>{book.title}</Link>
         <p className="card-text">
           {book.subtitle}
         </p>
