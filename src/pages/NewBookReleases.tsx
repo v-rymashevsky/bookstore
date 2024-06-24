@@ -32,8 +32,6 @@ export const NewBookReleases: React.FC = () => {
     ))
   }
 
-  console.log(books)
-
   return (
     <>
       <Title>New Book Releases</Title>

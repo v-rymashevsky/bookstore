@@ -18,7 +18,7 @@ export interface BookItem {
     image: string
     url: string
     pdf: {[key: string]: string}
-    quantity?: number | 1
+    quantity: number | 1
 }
 
 interface BookItemState {

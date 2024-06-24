@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { BookItem, fetchBook } from '../redux/book-item-slice'
 import { Title } from '../components/title'
 import { ShoppingCartButton } from '../components/shopping-cart-button'
-import { setCount } from '../redux/shopping-cart-slice'
+import { updateItems } from '../redux/shopping-cart-slice'
 
 export const BookDetails: React.FC = () => {
   const { id } = useParams()
@@ -30,7 +30,8 @@ export const BookDetails: React.FC = () => {
       shoppingCart.push({ ...book, quantity: 1 })
     }
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
-    dispatch(setCount(shoppingCart.length))
+    // dispatch(setCount(shoppingCart.length))
+    dispatch(updateItems(shoppingCart))
   }
 
   if (loading) {
@@ -44,7 +45,6 @@ export const BookDetails: React.FC = () => {
   if (!bookItem) {
     return <div>No book data found.</div>
   }
-  console.log('rendered book details')
 
   return (
     <>
@@ -79,6 +79,10 @@ export const BookDetails: React.FC = () => {
               <div className='d-flex flex justify-content-between'>
                 <strong>Year</strong>
                 <p>{bookItem.year}</p>
+              </div>
+              <div>
+              <strong>Description</strong>
+              <p>{bookItem.desc}</p>
               </div>
               <div className="d-flex flex-column">
                 <a className="mb-2" href={bookItem.pdf['Chapter 2']} target="_blank" rel="noopener noreferrer">Book Preview</a>

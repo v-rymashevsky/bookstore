@@ -71,7 +71,7 @@ const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    setFavourites (state, action: PayloadAction<Book[]>) {
+    updateFavourites (state, action: PayloadAction<Book[]>) {
       state.favourites = action.payload
     }
   },
@@ -106,5 +106,5 @@ const booksSlice = createSlice({
   }
 })
 
-export const { setFavourites } = booksSlice.actions
+export const { updateFavourites } = booksSlice.actions
 export const booksReducer = booksSlice.reducer
