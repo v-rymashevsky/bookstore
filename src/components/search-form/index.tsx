@@ -29,7 +29,7 @@ export const SearchForm: React.FC = () => {
         onChange={handleChangeSearch}
         value={search}
       />
-      <button type="submit" className="btn btn-warning">
+      <button type="submit" className="btn btn-warning" style={{ border: '1px solid #495057' }}>
         <i className="bi bi-search"></i>
       </button>
     </form>

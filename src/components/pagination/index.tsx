@@ -32,8 +32,8 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, pagesCount,
       {paginationScheme.map((item, index) => {
         if (typeof item === 'number') {
           return (
-            <li className="page-item" key={index}>
-              <NavLink className="page-link" to={`/${to}${item}`}>
+            <li className="page-item" style={{ color: 'black' }} key={index}>
+              <NavLink className="page-link" style={{ color: 'black', background: 'none' }} to={`/${to}${item}`}>
                 {item}
               </NavLink>
             </li>
