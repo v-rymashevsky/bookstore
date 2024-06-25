@@ -30,7 +30,6 @@ export const BookDetails: React.FC = () => {
       shoppingCart.push({ ...book, quantity: 1 })
     }
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
-    // dispatch(setCount(shoppingCart.length))
     dispatch(updateItems(shoppingCart))
   }
 
@@ -81,13 +80,20 @@ export const BookDetails: React.FC = () => {
                 <p>{bookItem.year}</p>
               </div>
               <div>
-              <strong>Description</strong>
-              <p>{bookItem.desc}</p>
+                <strong>Description</strong>
+                <p>{bookItem.desc}</p>
               </div>
-              <div className="d-flex flex-column">
-                <a className="mb-2" href={bookItem.pdf['Chapter 2']} target="_blank" rel="noopener noreferrer">Book Preview</a>
-                <ShoppingCartButton book={bookItem} onAddToCart={addToCart} />
-              </div>
+              {bookItem.pdf && (
+                <div className="d-flex flex-column mb-3">
+                  <strong>Book Preview</strong>
+                  {Object.keys(bookItem.pdf).map((key) => (
+                    <small key={key}><a className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href={bookItem.pdf[key]} target="_blank" rel="noopener noreferrer">
+                      {key}
+                    </a></small>
+                  ))}
+                </div>
+              )}
+              <ShoppingCartButton book={bookItem} onAddToCart={addToCart} />
             </div>
           </div>
         </div>
