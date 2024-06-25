@@ -22,13 +22,12 @@ export const QuantityControls: React.FC<QuantityControlsProps> = ({ book }) => {
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
         : cartItem
     )))
-    // dispatch(increaseTotal(book.price))
   }
 
   function decreaseQuantity (book: BookItem) {
     dispatch(updateItems(shoppingCart.map((cartItem: BookItem) =>
       cartItem.isbn13 === book.isbn13
-        ? { ...cartItem, quantity: cartItem.quantity - 1 }
+        ? { ...cartItem, quantity: Math.max(cartItem.quantity - 1, 1) }
         : cartItem
     )))
   }
