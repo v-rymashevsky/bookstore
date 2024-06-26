@@ -38,8 +38,6 @@ export const SearchResults: React.FC = () => {
     ))
   }
 
-  // if (!books.length) return <Title>0 results for &quot;{query}&quot;</Title>
-
   return (
     <>
       <Title>Found {total} results for &quot;{query}&quot;</Title>
