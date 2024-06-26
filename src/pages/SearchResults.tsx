@@ -16,6 +16,7 @@ export const SearchResults: React.FC = () => {
   const error = useSelector((state: RootState) => state.books.error)
   const isLoading = useSelector((state: RootState) => state.books.isLoading)
   const pagesCount = useSelector((state: RootState) => state.books.pagesCount)
+  const total = useSelector((state: RootState) => state.books.total)
 
   useEffect(() => {
     dispatch(fetchSearchResults({ search: query, page: page || '1' }))
@@ -31,19 +32,27 @@ export const SearchResults: React.FC = () => {
 
     return books.map((book: Book) => (
             <Card
-                key={book.isbn13}
+                key={book.id}
                 book={book}
             />
     ))
   }
 
+  // if (!books.length) return <Title>0 results for &quot;{query}&quot;</Title>
+
   return (
     <>
-      <Title>Search results for  &quot;{query}&quot;</Title>
-      <Pagination pagesCount={pagesCount} currentPage={Number(page)} to={`search/${query}/`} />
-      <div className="d-flex flex-wrap gap-2 mb-3">
-        {renderBooks()}
-      </div>
+      <Title>Found {total} results for &quot;{query}&quot;</Title>
+      {books.length
+        ? (
+        <>
+          <Pagination pagesCount={pagesCount} currentPage={Number(page)} to={`search/${query}/`} />
+          <div className="d-flex flex-wrap gap-2 mb-3">
+            {renderBooks()}
+          </div>
+        </>
+          )
+        : 'Try looking for something else'}
     </>
   )
 }
