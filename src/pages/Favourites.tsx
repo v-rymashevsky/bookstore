@@ -7,11 +7,10 @@ import { useSelector } from 'react-redux'
 
 export const Favourites: React.FC = () => {
   const favouriteBooks = useSelector((state: RootState) => state.books.favourites)
-
   const renderFavourites = () => {
     if (!favouriteBooks.length) return 'nothing to display'
     return favouriteBooks.map((book: Book) => (
-      <Card key={book.isbn13} book={book} />
+      <Card key={book.id} book={book} />
     ))
   }
 

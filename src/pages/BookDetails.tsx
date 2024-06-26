@@ -27,7 +27,7 @@ export const BookDetails: React.FC = () => {
     if (index !== -1) {
       shoppingCart.splice(index, 1)
     } else {
-      shoppingCart.push({ ...book, quantity: 1 })
+      shoppingCart.push({ ...book, quantity: 1, id: book.isbn13 })
     }
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
     dispatch(updateItems(shoppingCart))
@@ -37,12 +37,8 @@ export const BookDetails: React.FC = () => {
     return <Spinner />
   }
 
-  if (error) {
-    return <div>Error: {error}</div>
-  }
-
-  if (!bookItem) {
-    return <div>No book data found.</div>
+  if (!bookItem || error !== '0') {
+    return (<div><Title>Error</Title><p>No book data found</p></div>)
   }
 
   return (

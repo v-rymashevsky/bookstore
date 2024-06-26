@@ -15,8 +15,8 @@ async function requestSearchResults ({ search, page }: SearchParams) {
   return data
 }
 
-async function requestBookDetails (isbn13: string) {
-  const { data } = await client.get(`/books/${isbn13}`)
+async function requestBookDetails (id: string) {
+  const { data } = await client.get(`/books/${id}`)
   return data
 }
 export { requestBooks, requestBookDetails, requestSearchResults }

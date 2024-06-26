@@ -8,12 +8,12 @@ import { useSelector } from 'react-redux'
 
 export const ShoppingCart: React.FC = () => {
   const shoppingCart = useSelector((state: RootState) => state.cart.items)
-
+  console.log(shoppingCart)
   function renderShoppingCart () {
     if (!shoppingCart.length) return 'Your cart is empty!'
     return shoppingCart.map((book: BookItem) => (
       <ShoppingCartItem
-       key={book.isbn13}
+       key={book.id}
        book={book}
       />
     ))

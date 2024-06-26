@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { requestBookDetails } from '../services/book'
 
 export interface BookItem {
+    id: string
     error: string
     title: string
     subtitle: string
@@ -18,7 +19,7 @@ export interface BookItem {
     image: string
     url: string
     pdf: {[key: string]: string}
-    quantity: number | 1
+    quantity: number
 }
 
 interface BookItemState {
@@ -34,9 +35,9 @@ const initialState: BookItemState = {
 
 export const fetchBook = createAsyncThunk<BookItem, string>(
   'bookItem/fetchBook',
-  async (isbn13: string, { rejectWithValue }) => {
+  async (id: string, { rejectWithValue }) => {
     try {
-      return await requestBookDetails(isbn13)
+      return await requestBookDetails(id)
     } catch (error) {
       return rejectWithValue(
         typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'
@@ -58,6 +59,7 @@ export const bookItemSlice = createSlice({
       .addCase(fetchBook.fulfilled, (state, action) => {
         state.isLoading = false
         state.content = action.payload
+        state.error = action.payload.error
       })
       .addCase(fetchBook.rejected, (state, action) => {
         state.isLoading = false

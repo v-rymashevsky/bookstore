@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = () => {
         <SearchForm />
         <div className="navbar-nav flex-row">
           <NavLink className="nav-link px-3" aria-current="page" to="/books/favourites">Favourites</NavLink>
-  <ShoppingCartCounter />
+          <ShoppingCartCounter />
         </div>
       </div>
     </nav>
