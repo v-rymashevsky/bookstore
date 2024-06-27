@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Title } from '../components/title'
 import { RootState, useAppDispatch } from '../redux/store'
-import { Book, fetchSearchResults } from '../redux/books-slice'
+import { fetchSearchResults } from '../redux/books-slice'
 import { Spinner } from '../components/spinner'
 import { Card } from '../components/card'
 import { Pagination } from '../components/pagination'
+import { Book } from '../interfaces/book'
 
 export const SearchResults: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -40,7 +41,7 @@ export const SearchResults: React.FC = () => {
 
   return (
     <>
-      <Title>Found {total} results for &quot;{query}&quot;</Title>
+      <Title>Found {total} results for &quot;{query !== undefined ? query.split('').map(char => char === '+' ? ' ' : char).join('') : ''}&quot;</Title>
       {books.length
         ? (
         <>
