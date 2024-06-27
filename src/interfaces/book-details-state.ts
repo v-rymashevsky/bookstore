@@ -1,7 +1,7 @@
-import { BookDetails } from './book-details'
+import { BookDetailsItem } from './book-details-item'
 
 export interface BookDetailsState {
-    content: BookDetails | null
+    content: BookDetailsItem | null
     isLoading: boolean
     error: string | null
   }

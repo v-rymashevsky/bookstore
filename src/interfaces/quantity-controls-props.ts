@@ -1,5 +1,5 @@
-import { BookDetails } from './book-details'
+import { BookDetailsItem } from './book-details-item'
 
 export interface QuantityControlsProps {
-    book: BookDetails
+    book: BookDetailsItem
       }

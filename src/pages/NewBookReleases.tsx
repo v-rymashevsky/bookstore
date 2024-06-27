@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState, useAppDispatch } from '../redux/store'
-import { Book, fetchBooks } from '../redux/books-slice'
+import { fetchBooks } from '../redux/books-slice'
 import { Card } from '../components/card'
 import { Title } from '../components/title'
 import { Spinner } from '../components/spinner'
+import { Book } from '../interfaces/book'
 
 export const NewBookReleases: React.FC = () => {
   const dispatch = useAppDispatch()

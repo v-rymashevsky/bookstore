@@ -4,13 +4,13 @@ import { Title } from '../components/title'
 import { ShoppingCartItem } from '../components/shopping-cart-item'
 import { RootState } from '../redux/store'
 import { TotalValue } from '../components/total-value'
-import { BookDetails } from '../interfaces/book-details'
+import { BookDetailsItem } from '../interfaces/book-details-item'
 
 export const ShoppingCart: React.FC = () => {
   const shoppingCart = useSelector((state: RootState) => state.cart.items)
   function renderShoppingCart () {
     if (!shoppingCart.length) return 'Your cart is empty!'
-    return shoppingCart.map((book: BookDetails) => (
+    return shoppingCart.map((book: BookDetailsItem) => (
       <ShoppingCartItem
        key={book.id}
        book={book}

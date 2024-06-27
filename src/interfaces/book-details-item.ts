@@ -1,4 +1,4 @@
-export interface BookDetails {
+export interface BookDetailsItem {
     id: string
     error: string
     title: string

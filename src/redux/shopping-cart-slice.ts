@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { BookDetails } from '../interfaces/book-details'
+import { BookDetailsItem } from '../interfaces/book-details-item'
 import { ShoppingCartState } from '../interfaces/shopping-cart-state'
 
-function calculateTotal (items: BookDetails[]) {
+function calculateTotal (items: BookDetailsItem[]) {
   const total = items
     .map((book) => ({
       ...book,

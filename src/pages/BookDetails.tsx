@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom'
 import { Spinner } from '../components/spinner'
 import { RootState, useAppDispatch } from '../redux/store'
 import { useSelector } from 'react-redux'
-import { BookItem, fetchBook } from '../redux/book-item-slice'
+import { fetchBook } from '../redux/book-item-slice'
 import { Title } from '../components/title'
 import { ShoppingCartButton } from '../components/shopping-cart-button'
 import { updateItems } from '../redux/shopping-cart-slice'
+import { BookDetailsItem } from '../interfaces/book-details-item'
 
 export const BookDetails: React.FC = () => {
   const { id } = useParams()
@@ -21,8 +22,8 @@ export const BookDetails: React.FC = () => {
     }
   }, [id, dispatch])
 
-  function addToCart (book: BookItem) {
-    const shoppingCart: BookItem[] = JSON.parse(localStorage.getItem('shopping-cart') || '[]')
+  function addToCart (book: BookDetailsItem) {
+    const shoppingCart: BookDetailsItem[] = JSON.parse(localStorage.getItem('shopping-cart') || '[]')
     const index = shoppingCart.findIndex(cartItem => cartItem.isbn13 === book.isbn13)
     if (index !== -1) {
       shoppingCart.splice(index, 1)

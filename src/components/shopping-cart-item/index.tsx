@@ -1,5 +1,5 @@
 import React from 'react'
-import { BookDetails } from '../../interfaces/book-details'
+import { BookDetailsItem } from '../../interfaces/book-details-item'
 import { QuantityControls } from '../quantity-controls'
 import { RootState, useAppDispatch } from '../../redux/store'
 import { updateItems } from '../../redux/shopping-cart-slice'
@@ -10,8 +10,8 @@ export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({ book }) => {
   const dispatch = useAppDispatch()
   const shoppingCart = useSelector((state: RootState) => state.cart.items)
 
-  function removeItem (book: BookDetails) {
-    const filteredCart = shoppingCart.filter((cartItem: BookDetails) => cartItem.isbn13 !== book.isbn13)
+  function removeItem (book: BookDetailsItem) {
+    const filteredCart = shoppingCart.filter((cartItem: BookDetailsItem) => cartItem.isbn13 !== book.isbn13)
     localStorage.setItem('shopping-cart', JSON.stringify(filteredCart))
     dispatch(updateItems(filteredCart))
   }

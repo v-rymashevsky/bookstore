@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { requestBookDetails } from '../services/book'
-import { BookDetails } from '../interfaces/book-details'
+import { BookDetailsItem } from '../interfaces/book-details-item'
 import { BookDetailsState } from '../interfaces/book-details-state'
 
 const initialState: BookDetailsState = {
@@ -9,7 +9,7 @@ const initialState: BookDetailsState = {
   error: null
 }
 
-export const fetchBook = createAsyncThunk<BookDetails, string>(
+export const fetchBook = createAsyncThunk<BookDetailsItem, string>(
   'bookItem/fetchBook',
   async (id: string, { rejectWithValue }) => {
     try {
