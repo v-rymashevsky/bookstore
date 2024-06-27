@@ -1,44 +1,17 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { requestBooks, requestSearchResults } from '../services/book'
-
-export interface Book {
-  id: string
-  title: string
-  subtitle: string
-  isbn13: string
-  price: string
-  image: string
-  url: string
-}
-
-export interface SearchParams {
-  search: string | undefined
-  page: string | undefined
-}
-
-export interface SearchResults {
-  total: string
-  books: Book[]
-}
-
-interface BooksState {
-  list: Book[]
-  favourites: Book []
-  isLoading: boolean
-  error: string | null
-  total: string
-  pagesCount: number
-
-}
+import { Book } from '../interfaces/book'
+import { SearchParams } from '../interfaces/search-params'
+import { SearchResults } from '../interfaces/search-results'
+import { BooksState } from '../interfaces/books-state'
 
 const initialState: BooksState = {
   list: [] as Book[],
-  favourites: JSON.parse(localStorage.getItem('favoriteBooks') || '[]'),
+  favourites: JSON.parse(localStorage.getItem('favorite-books') || '[]'),
   isLoading: false,
   error: null,
   pagesCount: 0,
   total: ''
-
 }
 
 export const fetchBooks = createAsyncThunk<Book[], void>(

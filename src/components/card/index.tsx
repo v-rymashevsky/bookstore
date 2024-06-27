@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { Book, updateFavourites } from '../../redux/books-slice'
+import { updateFavourites } from '../../redux/books-slice'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../redux/store'
+import { Book } from '../../interfaces/book'
 
 export const Card: React.FC<{ book: Book }> = ({ book }) => {
   const [isFavorite, setIsFavorite] = useState(false)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const favoriteBooks: Book[] = JSON.parse(localStorage.getItem('favoriteBooks') || '[]')
+    const favoriteBooks: Book[] = JSON.parse(localStorage.getItem('favorite-books') || '[]')
     const isBookFavorite = favoriteBooks.some((favBook: Book) => favBook.isbn13 === book.isbn13)
     setIsFavorite(isBookFavorite)
   }, [book.isbn13])
 
   function toggleFavorite (book: Book) {
-    const favoriteBooks: Book[] = JSON.parse(localStorage.getItem('favoriteBooks') || '[]')
+    const favoriteBooks: Book[] = JSON.parse(localStorage.getItem('favorite-books') || '[]')
     const index = favoriteBooks.findIndex(favBook => favBook.isbn13 === book.isbn13)
     if (index !== -1) {
       favoriteBooks.splice(index, 1)
     } else {
       favoriteBooks.push(book)
     }
-    localStorage.setItem('favoriteBooks', JSON.stringify(favoriteBooks))
+    localStorage.setItem('favorite-books', JSON.stringify(favoriteBooks))
     setIsFavorite(!isFavorite)
     dispatch(updateFavourites(favoriteBooks))
   }

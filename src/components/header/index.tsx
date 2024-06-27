@@ -3,9 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { SearchForm } from '../search-form'
 import { ShoppingCartCounter } from '../shopping-cart-counter'
 
-interface HeaderProps { }
-
-export const Header: React.FC<HeaderProps> = () => {
+export const Header: React.FC = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div className="container-fluid w-75">

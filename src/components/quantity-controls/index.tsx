@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react'
-import { BookItem } from '../../redux/book-item-slice'
 import { updateItems } from '../../redux/shopping-cart-slice'
 import { RootState, useAppDispatch } from '../../redux/store'
 import { useSelector } from 'react-redux'
-
-interface QuantityControlsProps {
-    book: BookItem
-      }
+import { QuantityControlsProps } from '../../interfaces/quantity-controls-props'
+import { BookDetails } from '../../interfaces/book-details'
 
 export const QuantityControls: React.FC<QuantityControlsProps> = ({ book }) => {
   const dispatch = useAppDispatch()
@@ -16,16 +13,16 @@ export const QuantityControls: React.FC<QuantityControlsProps> = ({ book }) => {
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
   }, [shoppingCart])
 
-  function increaseQuantity (book: BookItem) {
-    dispatch(updateItems(shoppingCart.map((cartItem: BookItem) =>
+  function increaseQuantity (book: BookDetails) {
+    dispatch(updateItems(shoppingCart.map((cartItem: BookDetails) =>
       cartItem.isbn13 === book.isbn13
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
         : cartItem
     )))
   }
 
-  function decreaseQuantity (book: BookItem) {
-    dispatch(updateItems(shoppingCart.map((cartItem: BookItem) =>
+  function decreaseQuantity (book: BookDetails) {
+    dispatch(updateItems(shoppingCart.map((cartItem: BookDetails) =>
       cartItem.isbn13 === book.isbn13
         ? { ...cartItem, quantity: Math.max(cartItem.quantity - 1, 1) }
         : cartItem

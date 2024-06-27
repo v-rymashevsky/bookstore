@@ -1,39 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { requestBookDetails } from '../services/book'
+import { BookDetails } from '../interfaces/book-details'
+import { BookDetailsState } from '../interfaces/book-details-state'
 
-export interface BookItem {
-    id: string
-    error: string
-    title: string
-    subtitle: string
-    authors: string
-    publisher: string
-    language: string
-    isbn10: string
-    isbn13: string
-    pages: string
-    year: string
-    rating: string
-    desc: string
-    price: string
-    image: string
-    url: string
-    pdf: {[key: string]: string}
-    quantity: number
-}
-
-interface BookItemState {
-    content: BookItem | null
-    isLoading: boolean
-    error: string | null
-  }
-const initialState: BookItemState = {
+const initialState: BookDetailsState = {
   content: null,
   isLoading: false,
   error: null
 }
 
-export const fetchBook = createAsyncThunk<BookItem, string>(
+export const fetchBook = createAsyncThunk<BookDetails, string>(
   'bookItem/fetchBook',
   async (id: string, { rejectWithValue }) => {
     try {

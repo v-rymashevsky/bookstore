@@ -1,20 +1,17 @@
 import React from 'react'
-import { BookItem } from '../../redux/book-item-slice'
+import { BookDetails } from '../../interfaces/book-details'
 import { QuantityControls } from '../quantity-controls'
 import { RootState, useAppDispatch } from '../../redux/store'
 import { updateItems } from '../../redux/shopping-cart-slice'
 import { useSelector } from 'react-redux'
-
-interface ShoppingCartItemProps {
-    book: BookItem
-   }
+import { ShoppingCartItemProps } from '../../interfaces/shopping-cart-item-props'
 
 export const ShoppingCartItem: React.FC<ShoppingCartItemProps> = ({ book }) => {
   const dispatch = useAppDispatch()
   const shoppingCart = useSelector((state: RootState) => state.cart.items)
 
-  function removeItem (book: BookItem) {
-    const filteredCart = shoppingCart.filter((cartItem: BookItem) => cartItem.isbn13 !== book.isbn13)
+  function removeItem (book: BookDetails) {
+    const filteredCart = shoppingCart.filter((cartItem: BookDetails) => cartItem.isbn13 !== book.isbn13)
     localStorage.setItem('shopping-cart', JSON.stringify(filteredCart))
     dispatch(updateItems(filteredCart))
   }

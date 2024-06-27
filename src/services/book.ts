@@ -1,6 +1,7 @@
 import { client } from '../api/client'
 import { booksEndpoint } from '../api/endpoints'
-import { Book, SearchParams } from '../redux/books-slice'
+import { Book } from '../interfaces/book'
+import { SearchParams } from '../interfaces/search-params'
 
 async function requestBooks (params = {}) {
   const { data } = await client.get(booksEndpoint, { params })

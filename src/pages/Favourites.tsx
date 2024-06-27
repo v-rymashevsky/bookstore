@@ -1,9 +1,9 @@
 import React from 'react'
-import { Book } from '../redux/books-slice'
+import { useSelector } from 'react-redux'
 import { Card } from '../components/card'
 import { Title } from '../components/title'
 import { RootState } from '../redux/store'
-import { useSelector } from 'react-redux'
+import { Book } from '../interfaces/book'
 
 export const Favourites: React.FC = () => {
   const favouriteBooks = useSelector((state: RootState) => state.books.favourites)

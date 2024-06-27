@@ -1,11 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
-interface PaginationProps {
-  currentPage: number
-  pagesCount: number
-  to: string
-}
+import { PaginationProps } from '../../interfaces/pagination-props'
 
 export const Pagination: React.FC<PaginationProps> = ({ currentPage, pagesCount, to }) => {
   function buildPaginationScheme () {

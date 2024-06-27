@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { BookItem } from '../../redux/book-item-slice'
+import { BookDetails } from '../../interfaces/book-details'
+import { ShoppingCartButtonProps } from '../../interfaces/shopping-cart-button-props'
 
-interface CartButtonProps {
-    book: BookItem
-    onAddToCart: (book: BookItem) => void
-  }
-
-export const ShoppingCartButton: React.FC<CartButtonProps> = ({ book, onAddToCart }) => {
+export const ShoppingCartButton: React.FC<ShoppingCartButtonProps> = ({ book, onAddToCart }) => {
   const [isInCart, setIsInCart] = useState<boolean>(false)
 
   useEffect(() => {
     const shoppingCart = JSON.parse(localStorage.getItem('shopping-cart') || '[]')
-    const found = shoppingCart.some((item: BookItem) => item.isbn13 === book.isbn13)
+    const found = shoppingCart.some((item: BookDetails) => item.isbn13 === book.isbn13)
     setIsInCart(found)
   }, [book])
 
